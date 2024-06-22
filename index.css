@@ -43,9 +43,9 @@ body {
 }
 
 .play-area .food {
-    background-color: darkcyan;
+    background-color: lightcoral;
 }
 
 .play-area .snake {
-    background-color: red;
+    background-color: green;
 }
