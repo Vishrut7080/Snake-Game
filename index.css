@@ -14,8 +14,8 @@ body {
 }
 
 .container {
-    width: 65vmin;
-    height: 70vmin;
+    width: 85vmin;
+    height: 90vmin;
     display: flex;
     flex-direction: column;
     overflow: hidden;
