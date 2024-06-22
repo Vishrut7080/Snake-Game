@@ -1,6 +1,7 @@
 const playBoard = document.querySelector(".play-area");
 
-let foodX = 15, foodY = 20;
+let foodX, foodY;
+let snakeX = 5, snakeY = 10;
 
 const changeFoodPoa = () => {
     //Passing a random 0 - 30 value as food position
@@ -11,6 +12,7 @@ const changeFoodPoa = () => {
 
 const initGame = () => {
     let htmlMarkup = `<div class="food" style="grid-area: ${foodX}/${foodY}"></div>`;
+    htmlMarkup += `<div class="snake" style="grid-area: ${snakeX}/${snakeY}"></div>`;
     playBoard.innerHTML = htmlMarkup;
 }
 changeFoodPoa();
