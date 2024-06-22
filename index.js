@@ -4,12 +4,21 @@ let foodX, foodY;
 let snakeX = 5, snakeY = 10;
 let snakeBody = [];
 let velocityX = 0, velocityY = 0;
+let gameOver = false;
+let setIntervalId;
 
 const changeFoodPoa = () => {
     //Passing a random 0 - 30 value as food position
     foodX = Math.floor(Math.random() * 30) + 1;
     foodY = Math.floor(Math.random() * 30) + 1;
     console.log(foodX, foodY);
+}
+
+const handleGameOver = () => {
+    //Clearing the timer and reloading the page on game over
+    clearInterval(setIntervalId);
+    alert("Game Over! Press Ok to Play");
+    location.reload();
 }
 
 const changeDirection = (e) => {
@@ -35,6 +44,7 @@ const changeDirection = (e) => {
 }
 
 const initGame = () => {
+    if (gameOver) return handleGameOver();
     let htmlMarkup = `<div class="food" style="grid-area: ${foodY}/${foodX}"></div>`;
     //Checking if snake hits Food
     if (snakeX === foodX && snakeY === foodY) {
@@ -52,6 +62,12 @@ const initGame = () => {
     //Updating snake head's position based on current velocity
     snakeX += velocityX;
     snakeY += velocityY;
+
+    //Checking if snake's head is out of wall
+    if (snakeX <= 0 || snakeX > 30 || snakeY <= 0 || snakeY > 30) {
+        gameOver = true;
+    }
+
     for (let i = 0; i < snakeBody.length; i++) {
         //Adding div for each part of snake body
         htmlMarkup += `<div class="snake" style="grid-area: ${snakeBody[i][1]}/${snakeBody[i][0]}"></div>`;
@@ -60,6 +76,6 @@ const initGame = () => {
     playBoard.innerHTML = htmlMarkup;
 }
 changeFoodPoa();
-setInterval(initGame, 125)
+setIntervalId = setInterval(initGame, 125)
 
 document.addEventListener("keydown", changeDirection);
