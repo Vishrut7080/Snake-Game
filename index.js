@@ -27,6 +27,10 @@ const changeDirection = (e) => {
         velocityX = -1;
         velocityY = 0;
     }
+    if (e.key === "`") {
+        velocityX = 0;
+        velocityY = 0;
+    }
 }
 
 const initGame = () => {
