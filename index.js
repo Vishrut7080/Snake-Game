@@ -1,5 +1,6 @@
 const playBoard = document.querySelector(".play-area");
 const scoreElement = document.querySelector(".score");
+const high_scoreElement = document.querySelector(".high-score");
 
 let foodX, foodY;
 let snakeX = 5, snakeY = 10;
@@ -11,6 +12,7 @@ let score = 0;
 
 // Getting highscore from local storage
 let high_score = localStorage.getItem("high-score") || 0;
+high_scoreElement.innerText = `High Score: ${high_score}`;
 
 const changeFoodPoa = () => {
     //Passing a random 0 - 30 value as food position
@@ -59,7 +61,9 @@ const initGame = () => {
 
         high_score = score >= high_score ? score : high_score;
         localStorage.setItem("high-score", high_score);
+
         scoreElement.innerText = `Score: ${score}`;
+        high_scoreElement.innerText = `High Score: ${high_score}`;
         console.log(snakeBody);
     }
 
