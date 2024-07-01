@@ -1,4 +1,5 @@
 const playBoard = document.querySelector(".play-area");
+const scoreElement = document.querySelector(".score");
 
 let foodX, foodY;
 let snakeX = 5, snakeY = 10;
@@ -6,6 +7,7 @@ let snakeBody = [];
 let velocityX = 0, velocityY = 0;
 let gameOver = false;
 let setIntervalId;
+let score = 0;
 
 const changeFoodPoa = () => {
     //Passing a random 0 - 30 value as food position
@@ -50,6 +52,9 @@ const initGame = () => {
     if (snakeX === foodX && snakeY === foodY) {
         changeFoodPoa();
         snakeBody.push([foodX, foodY]);//Pushing food in snake body
+        score++;//Increment by 1
+
+        scoreElement.innerText = `Score: ${score}`;
         console.log(snakeBody);
     }
 
