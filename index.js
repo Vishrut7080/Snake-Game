@@ -71,6 +71,11 @@ const initGame = () => {
     for (let i = 0; i < snakeBody.length; i++) {
         //Adding div for each part of snake body
         htmlMarkup += `<div class="snake" style="grid-area: ${snakeBody[i][1]}/${snakeBody[i][0]}"></div>`;
+        //Checking if snake head hit the body, if yes then gameOver is true
+        if (i !== 0 && snakeBody[0][1] === snakeBody[i][1] && snakeBody[0][0] === snakeBody[i][0]) {
+            gameOver = true;
+        }
+
     }
 
     playBoard.innerHTML = htmlMarkup;
