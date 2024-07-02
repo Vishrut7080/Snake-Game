@@ -52,7 +52,8 @@ const changeDirection = (e) => {
 }
 
 controls.forEach(key => {
-    key.addEventListener("click", () => console.log(key));
+    //Calling changeDirection on each key and passing key dataset value as an object
+    key.addEventListener("click", () => changeDirection({ key: key.dataset.key }));
 
 })
 
