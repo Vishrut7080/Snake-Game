@@ -2,6 +2,7 @@ const playBoard = document.querySelector(".play-area");
 const scoreElement = document.querySelector(".score");
 const high_scoreElement = document.querySelector(".high-score");
 const controls = document.querySelectorAll(".controls i");
+let flag = true;
 
 let foodX, foodY;
 let snakeX = 5, snakeY = 10;
@@ -35,19 +36,24 @@ const changeDirection = (e) => {
     if (e.key === "ArrowUp" && velocityY != 1) {
         velocityX = 0;
         velocityY = -1;
+        flag = true;
     } else if (e.key === "ArrowDown" && velocityY != -1) {
         velocityX = 0;
         velocityY = 1;
+        flag = true;
     } else if (e.key === "ArrowRight" && velocityX != -1) {
         velocityX = 1;
         velocityY = 0;
+        flag = true;
     } else if (e.key === "ArrowLeft" && velocityX != 1) {
         velocityX = -1;
         velocityY = 0;
+        flag = true;
     }
-    if (e.key === "`") {
+    if (e.key === "p" || e.key === "P") {
         velocityX = 0;
         velocityY = 0;
+        flag = false
     }
 }
 
@@ -93,8 +99,10 @@ const initGame = () => {
         //Adding div for each part of snake body
         htmlMarkup += `<div class="snake" style="grid-area: ${snakeBody[i][1]}/${snakeBody[i][0]}"></div>`;
         //Checking if snake head hit the body, if yes then gameOver is true
-        if (i !== 0 && snakeBody[0][1] === snakeBody[i][1] && snakeBody[0][0] === snakeBody[i][0]) {
-            gameOver = true;
+        if (flag === true) {
+            if (i !== 0 && snakeBody[0][1] === snakeBody[i][1] && snakeBody[0][0] === snakeBody[i][0]) {
+                gameOver = true;
+            }
         }
 
     }
