@@ -55,6 +55,9 @@ const changeDirection = (e) => {
         velocityY = 0;
         flag = false
     }
+    if (e.key === "m" || e.key === "M") {
+        audio.muted = !audio.muted;
+    }
 }
 
 controls.forEach(key => {
