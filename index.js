@@ -2,6 +2,7 @@ const playBoard = document.querySelector(".play-area");
 const scoreElement = document.querySelector(".score");
 const high_scoreElement = document.querySelector(".high-score");
 const controls = document.querySelectorAll(".controls i");
+const audio = document.querySelector("audio");
 let flag = true;
 
 let foodX, foodY;
@@ -24,6 +25,7 @@ const changeFoodPoa = () => {
 }
 
 const handleGameOver = () => {
+    audio.pause();
     //Clearing the timer and reloading the page on game over
     clearInterval(setIntervalId);
     alert("Game Over! Press Ok to Play");
@@ -37,23 +39,28 @@ const changeDirection = (e) => {
         velocityX = 0;
         velocityY = -1;
         flag = true;
+        audio.play();
     } else if (e.key === "ArrowDown" && velocityY != -1) {
         velocityX = 0;
         velocityY = 1;
         flag = true;
+        audio.play();
     } else if (e.key === "ArrowRight" && velocityX != -1) {
         velocityX = 1;
         velocityY = 0;
         flag = true;
+        audio.play();
     } else if (e.key === "ArrowLeft" && velocityX != 1) {
         velocityX = -1;
         velocityY = 0;
         flag = true;
+        audio.play();
     }
     if (e.key === "p" || e.key === "P") {
         velocityX = 0;
         velocityY = 0;
-        flag = false
+        audio.pause();
+        flag = false;
     }
     if (e.key === "m" || e.key === "M") {
         audio.muted = !audio.muted;
@@ -67,7 +74,9 @@ controls.forEach(key => {
 })
 
 const initGame = () => {
-    if (gameOver) return handleGameOver();
+    if (gameOver) {
+        return handleGameOver()
+    };
     let htmlMarkup = `<div class="food" style="grid-area: ${foodY}/${foodX}"></div>`;
     //Checking if snake hits Food
     if (snakeX === foodX && snakeY === foodY) {
@@ -117,8 +126,3 @@ setIntervalId = setInterval(initGame, 125)
 
 document.addEventListener("keydown", changeDirection);
 
-const audio = document.querySelector("audio");
-
-setInterval(() => {
-    audio.play();
-}, 1000); 
