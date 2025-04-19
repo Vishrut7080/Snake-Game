@@ -113,3 +113,9 @@ changeFoodPoa();
 setIntervalId = setInterval(initGame, 125)
 
 document.addEventListener("keydown", changeDirection);
+
+const audio = document.querySelector("audio");
+
+setInterval(() => {
+    audio.play();
+}, 1000); 
